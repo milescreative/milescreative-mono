@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
+		"declaration": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"inlineSourceMap": false,
+		"lib": ["esnext"],
+		"listEmittedFiles": false,
+		"listFiles": false,
+		"moduleResolution": "bundler",
+		"noFallthroughCasesInSwitch": true,
+		"pretty": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"traceResolution": false,
+		"outDir": "",
+		"target": "esnext",
+		"module": "esnext",
+		"types": [
+			"@types/node",
+			"@types/service-worker-mock",
+			"@cloudflare/workers-types/2023-07-01"
+		],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@milescreative/mc-rate-limiter": ["../../packages/mc-rate-limiter/src/index.ts"],
+      "@milescreative/mc-rate-limiter/ip": ["../../packages/mc-rate-limiter/src/utils/ip.ts"]
+    }
+	},
+	"exclude": ["node_modules", "dist", "tests"],
+	"include": ["src", "scripts", "**/*.ts", "**/*.tsx"]
+}
