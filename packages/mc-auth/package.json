@@ -37,6 +37,10 @@
     "registry": "https://npm.pkg.github.com",
     "access": "restricted"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/milescreative/milescreative-mono.git"
+  },
   "exports": {
     ".": {
       "development": {
