@@ -8,16 +8,25 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "@gen": "prisma generate",
+    "with-env": "dotenv -e ./.env  -e ../../../.env --",
+    "migrate:dev": "pnpm with-env prisma migrate dev --create-only && pnpm @gen && pnpm with-env prisma migrate dev"
   },
   "dependencies": {
     "@milescreative/mc-auth": "workspace:*",
     "@milescreative/mc-rate-limiter": "workspace:*",
+    "@neondatabase/serverless": "^0.9.0",
+    "@prisma/client": "5.22.0",
     "@repo/ui": "workspace:*",
+    "@t3-oss/env-core": "^0.11.1",
     "@upstash/redis": "^1.34.3",
+    "kysely": "^0.27.4",
+    "kysely-neon": "^1.3.0",
     "next": "^15.1.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -25,6 +34,9 @@
     "@types/node": "^20",
     "@types/react": "18.3.1",
     "@types/react-dom": "18.3.0",
+    "@types/ws": "^8.5.13",
+    "prisma": "^6.1.0",
+    "prisma-kysely": "^1.8.0",
     "typescript": "5.5.4"
   }
 }

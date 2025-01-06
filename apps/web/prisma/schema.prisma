@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator kysely {
+  provider        = "prisma-kysely"
+  output          = "../kysely"
+  previewFeatures = ["multiSchema"]
+  fileName        = "types.ts"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["public"]
+}
+
+model RateLimit {
+  id         String   @id
+  count      Int
+  reset      BigInt
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@map("rate_limit")
+  @@schema("public")
+}
