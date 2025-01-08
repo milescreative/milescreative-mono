@@ -110,14 +110,14 @@ a {
 
 .pen-stroke {
   position: relative;
-  display: inline;
+  /* display: inline; */
   /* color: #ff2727; */
 
   svg {
     position: absolute;
-    top: 1.2em;
-    left: 0;
-    width: 100%;
+    /* top: 1.2em; */
+    /* left: 0; */
+    /* width: 100%; */
     overflow: visible;
     path {
       fill: none;
@@ -132,4 +132,26 @@ a {
 .noise {
   background: hsl(var(--background));
   background-image: url(/noise-light.png);
+}
+
+.title-anchor {
+  anchor-name: --title;
+}
+
+.typewriter-target {
+  position: absolute;
+  position-anchor: --title;
+  position-area: bottom;
+  width: calc(anchor-size(width) * 1.1);
+}
+
+.underline-anchor {
+  anchor-name: --underline;
+}
+
+.underline-target {
+  position: absolute;
+  position-anchor: --underline;
+  position-area: bottom;
+  width: calc(anchor-size(width));
 }

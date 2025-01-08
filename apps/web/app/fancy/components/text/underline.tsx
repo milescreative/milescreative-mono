@@ -38,18 +38,18 @@ export const Underline = ({ children }: UnderlineProps) => {
 
   return (
     <motion.div
-      className="pen-stroke relative inline-block"
+      className="pen-stroke"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.75 }}
     >
-      <span className="relative z-10">{children}</span>
+      <span className="underline-anchor">{children}</span>
       <svg
         viewBox={`0 0 100 ${height}`}
         height={height}
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
-        className="absolute left-0 bottom-0 w-full"
+        className="underline-target absolute"
       >
         <path d={path} strokeWidth={`${strokeWidth}em`} />
       </svg>

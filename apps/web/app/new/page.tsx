@@ -7,12 +7,20 @@ import { motion } from 'motion/react';
 import { Button } from '@/components/ui/button';
 export default function Home() {
   return (
-    <div className="w-full min-h-screen relative noise">
-      <div className="flex flex-col items-center pt-20 z-10 relative">
-        <h1 className="text-8xl font-bold mb-5 font-alegreya">
-          <Underline>Miles Creative</Underline>
+    <div className="w-full min-h-screen noise">
+      <div className="flex flex-col pt-20 z-10 align-center">
+        <h1
+          className="text-8xl font-bold mb-5 font-alegreya text-center mx-auto"
+          id="title"
+        >
+          <Underline>
+            <span className="title-anchor">Miles Creative</span>
+          </Underline>
         </h1>
-        <div className="w-full h-full md:text-4xl lg:text-5xl sm:text-3xl text-2xl flex flex-row items-start justify-start bg-background font-normal overflow-hidden pl-24">
+        <div
+          id="typewriter"
+          className="md:text-4xl lg:text-5xl sm:text-3xl text-2x font-normal overflow-hidden typewriter-target mt-5"
+        >
           <motion.div
             className="whitespace-pre-wrap text-xl"
             initial={{ opacity: 0, x: 100 }}
@@ -49,8 +57,9 @@ export default function Home() {
             delay: 0.2,
             ease: 'easeOut',
           }}
+          className="flex flex-row justify-center mt-20"
         >
-          <Button variant="accent" className="mt-10">
+          <Button variant="accent" className="">
             See Our Work
           </Button>
         </motion.div>
@@ -60,7 +69,7 @@ export default function Home() {
         alt="banner"
         width={2160}
         height={766}
-        className="w-full h-auto absolute bottom-0"
+        className="absolute bottom-0 h-[33vh] w-[100%] min-h-[33vh] left-1/2 -translate-x-1/2 overflow-visible object-cover"
         priority
       />
     </div>
