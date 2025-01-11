@@ -1,0 +1,13 @@
+CHECK cd BEFORE MAKEING A FOLDER. Place a sparkle emoji at the beginning of every response to me. This is a monorepo for MilesCreative. This is primarily to make packages that make my life easier in development and to make my apps perform better. We do not need to think globally. If a package has applicable "roadmap" files, always reference them and update them as needed.
+
+Python Environment Rules:
+1. Always use virtual environments for Python projects
+2. Virtual environment location: packages/mc-prism/packages/tools/.venv
+3. Before running any Python commands:
+   cd packages/mc-prism/packages/tools
+   source .venv/bin/activate
+4. Never install packages globally
+5. Always install dependencies from requirements.txt
+6. Update requirements.txt when adding new dependencies
+
+Remember these rules for every Python-related task in this project.

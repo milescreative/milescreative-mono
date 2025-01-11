@@ -12,7 +12,7 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 
 * {
@@ -58,10 +58,12 @@ a {
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 215.9 100% 75.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent-foreground: 169 73% 45%;
+    --accent-two: 165 98% 33%;
+    --accent-two-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
+    --border: 225 21.1% 14.9%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
     --chart-1: 12 76% 61%;
@@ -78,7 +80,7 @@ a {
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
+    --primary: 225, 21.1, 14.9;
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
@@ -104,7 +106,7 @@ a {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    /* @apply bg-background text-foreground; */
   }
 }
 
@@ -131,7 +133,11 @@ a {
 
 .noise {
   background: hsl(var(--background));
-  background-image: url(/noise-light.png);
+  background-image: url(/noise-s.svg);
+}
+.noise-dark {
+  background: hsl(var(--foreground));
+  background-image: url(/noise-s.svg);
 }
 
 .title-anchor {
@@ -142,7 +148,17 @@ a {
   position: absolute;
   position-anchor: --title;
   position-area: bottom;
-  width: calc(anchor-size(width) * 1.1);
+  width: min(calc(anchor-size(width) * 1.1), 95vw);
+}
+
+.text-anchor {
+  anchor-name: --text;
+}
+
+.text-target {
+  position: absolute;
+  position-anchor: --text;
+  position-area: top;
 }
 
 .underline-anchor {
@@ -154,4 +170,157 @@ a {
   position-anchor: --underline;
   position-area: bottom;
   width: calc(anchor-size(width));
+}
+
+.highlight {
+  position: relative;
+}
+
+.highlight:after {
+  background-color: hsl(var(--foreground));
+  content: " ";
+  height: 30%;
+  position: absolute;
+  inset: 0;
+  margin-left: -1rem;
+  top: 65%;
+  width: calc(100% + 2.75rem);
+  z-index: -1;
+}
+
+/* CSS */
+.button-56 {
+  align-items: center;
+  background-color: #fee6e3;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-56:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform 0.2s ease-out;
+  z-index: -1;
+}
+
+.button-56:hover:after {
+  transform: translate(0, 0);
+}
+
+.button-56:active {
+  background-color: #ffdeda;
+  outline: 0;
+}
+
+.button-56:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .button-56 {
+    padding: 0 40px;
+  }
+}
+
+/* CSS */
+.button-74 {
+  background-color: hsl(var(--foreground));
+  border: 4px solid hsl(var(--border));
+  border-radius: 30px;
+  box-shadow: hsl(var(--accent-two)) 4px 4px 0 0;
+  color: hsl(var(--background));
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-74:hover {
+  background-color: hsl(var(--accent));
+  box-shadow: hsl(var(--accent-two)) 2px 2px 0 0;
+  transition: all 0.2s ease-out;
+}
+
+.button-74:active {
+  box-shadow: hsl(var(--accent-two)) 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+.div-74-inverted {
+  background-color: hsl(var(--background));
+  border: 4px solid hsl(var(--accent-two));
+  border-radius: 30px;
+  box-shadow: hsl(var(--accent-two)) 4px 4px 0 0;
+  color: hsl(var(--foreground));
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 0 18px;
+  line-height: 50px;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .div-74-inverted {
+    width: 50%;
+    padding: 0 25px;
+  }
+}
+
+marker {
+  padding: 30px 0 8px;
+  position: relative;
+}
+
+marker::before {
+  content: "";
+  position: absolute;
+  left: 7%;
+  bottom: 16px;
+  width: 150px;
+  height: 14px;
+  transform: skew(-12deg) translateX(-50%);
+  background: rgba(238, 111, 87, 0.5);
+  z-index: -1;
 }

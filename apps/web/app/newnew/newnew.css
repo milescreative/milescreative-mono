@@ -1,0 +1,211 @@
+:root {
+  --vw: 100vw;
+}
+
+.root {
+  --root-width: 100vw;
+  --root-height: 100vh;
+}
+
+.foreign-text {
+  /* font: 50px sans-serif; */
+  color: hsl(var(--foreground));
+  word-wrap: break-word; /* Ensure text wraps */
+  word-break: break-word;
+  white-space: normal; /* Allow dynamic text wrapping */
+  width: 100%; /* Make internal div responsive */
+}
+.foreign-text-neg {
+  /* font: 50px sans-serif; */
+  color: hsl(var(--background));
+
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  width: 100%;
+}
+.top-div {
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  position: relative;
+  width: 100%; /* Make container responsive */
+}
+#svg-main {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%; /* Dynamic width */
+  height: 100%; /* Maintain aspect ratio */
+  fill: green;
+}
+rect {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+foreignObject {
+  height: 250%;
+  min-height: 200px;
+  /* top: 200px; */
+  /* background-color: blue; */
+  width: 100%;
+  /* width: 100%; Ensure foreignObject scales */
+  /* background-color: red; */
+  /* padding-top: 10%; */
+}
+
+.header-path {
+  transform-origin: center;
+  will-change: transform;
+}
+
+#text-main {
+  margin-left: 10%;
+  display: block;
+  width: 80%;
+  font-size: 5rem;
+  line-height: 1.25;
+  margin-top: 75vh;
+}
+
+.header-path {
+  transform: scale(3.5) translate(0, 20px);
+}
+
+.top-div {
+  height: 35vh;
+}
+
+#overlay-title {
+  color: pink;
+}
+
+@media only screen and (orientation: landscape) {
+  .header-path {
+    transform: scale(1.5);
+  }
+  #overlay-title {
+    color: rgb(255, 238, 0);
+  }
+}
+
+/* Small devices such as large phones (640px and up) */
+@media only screen and (min-width: 500px) {
+  .header-path {
+    transform: scale(2.7);
+  }
+  .top-div {
+    height: 50vh;
+  }
+  #text-main {
+    margin-top: 70vh;
+  }
+  #overlay-title {
+    color: blue;
+  }
+  #text-main {
+    font-size: 4.5rem;
+  }
+}
+/* Small devices such as large phones (640px and up) */
+@media only screen and (min-width: 540px) and (orientation: landscape) {
+  .header-path {
+    transform: scale(1.5);
+  }
+  .top-div {
+    height: 50vh;
+  }
+  #text-main {
+    margin-top: 45vh;
+  }
+  #overlay-title {
+    color: rgb(255, 0, 0);
+  }
+  #text-main {
+    font-size: 4.5rem;
+  }
+}
+
+/* Large devices such as laptops (1024px and up) */
+@media only screen and (min-width: 900px) {
+  .header-path {
+    transform: scale(1.5) translate(0, -15px);
+  }
+  .top-div {
+    height: 30vh;
+  }
+  #text-main {
+    /* margin-left: 20%; */
+    /* width: 60%; */
+    font-size: 4.5rem;
+    margin-top: 5vh;
+  }
+  #overlay-title {
+    color: green;
+  }
+}
+@media only screen and (min-width: 900px) and (orientation: landscape) {
+  .header-path {
+    transform: scale(2) translate(0, -60px);
+  }
+  #overlay-title {
+    color: yellow;
+  }
+  .top-div {
+    height: 55vh;
+  }
+  #text-main {
+    margin-left: 15%;
+    /* width: 60%; */
+    font-size: 4.5rem;
+    margin-top: 30vh;
+  }
+}
+
+@media only screen and (min-width: 1100px) and (orientation: landscape) {
+  .header-path {
+    transform: scale(2) translate(0, -60px);
+  }
+  #overlay-title {
+    color: magenta;
+  }
+  .top-div {
+    height: 58vh;
+  }
+  #text-main {
+    /* margin-left: 20%; */
+    /* width: 60%; */
+    font-size: 4rem;
+    margin-top: 30vh;
+  }
+}
+
+/* Largest devices such as desktops (1280px and up) */
+@media only screen and (min-width: 1280px) {
+  .header-path {
+    transform: scale(2) translate(0, -60px);
+  }
+  #overlay-title {
+    color: rgb(0, 255, 255);
+  }
+  .top-div {
+    height: 58vh;
+  }
+  #text-main {
+    /* margin-left: 20%; */
+    /* width: 60%; */
+    font-size: 4rem;
+    margin-top: 25vh;
+  }
+}
+
+/* For 2xl desktop: */
+@media only screen and (min-width: 1536px) {
+  #text-main {
+    margin-top: 10rem;
+  }
+  #overlay-title {
+    color: orange;
+  }
+}

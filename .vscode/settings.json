@@ -27,5 +27,26 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
-  "biome.enabled": false
+  "biome.enabled": false,
+  "python.envFile": "${workspaceFolder}/packages/mc-prism/packages/tools/.env",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.indexing": true,
+  "python.analysis.packageIndexDepths": [
+    {
+      "name": "packages/mc-prism/packages/tools",
+      "depth": 5
+    }
+  ],
+  "python.defaultInterpreterPath": "${workspaceFolder}/packages/mc-prism/packages/tools/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.analysis.extraPaths": [
+    "${workspaceFolder}/packages/mc-prism/packages/tools"
+  ],
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.diagnosticMode": "workspace",
+  "python.analysis.typeCheckingMode": "basic",
+  "files.associations": {
+    "*.py": "python"
+  }
 }
