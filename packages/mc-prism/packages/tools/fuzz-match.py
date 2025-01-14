@@ -1,11 +1,10 @@
 from rapidfuzz import process, fuzz, utils
-from fontsource_fetcher import FontSourceFetcher
 
-strs = ["open sans"]
-str2 = "open-sans"
-
+strs = ["Brush Script"]
+str2 = "Brush Script MT"
 
 
-extract_one = process.extractOne(str2,strs, scorer=fuzz.QRatio, processor=utils.default_process)
+
+extract_one = process.extractOne(str2,strs, scorer=fuzz.WRatio, processor=utils.default_process)
 
 print(extract_one)

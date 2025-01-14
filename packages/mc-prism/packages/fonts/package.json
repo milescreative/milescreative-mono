@@ -15,10 +15,12 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
+    "@fontsource-variable/grandstander": "^5.1.2",
     "axios": "^1.6.5",
     "commander": "^11.1.0",
     "google-font-metadata": "^6.0.3",
-    "inquirer": "^9.2.12"
+    "inquirer": "^9.2.12",
+    "puppeteer": "^24.0.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
