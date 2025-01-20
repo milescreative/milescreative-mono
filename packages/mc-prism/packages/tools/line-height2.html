@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font Line Height Comparison</title>
+    <style>
+      /* body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        text-align: center;
+      } */
+      /* anton-latin-400-normal */
+      /* Font Families */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='80' viewBox='0 0 100 80'%3E%3Crect width='58' height='67' x='1' y='0' fill='none' stroke='red' stroke-width='3'/%3E%3Ctext x='2' y='78' font-size='10' fill='red'%3EAP: 64px%3C/text%3E%3C/svg%3E")
+            30 27,
+          auto;
+      }
+      /* Font Families */
+      @font-face {
+        font-family: 'Anonymous Pro';
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/anonymous-pro@latest/latin-400-normal.woff2)
+            format('woff2'),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/anonymous-pro@latest/latin-400-normal.woff)
+            format('woff');
+        size-adjust: 156.939676%;
+        descent-override: 0%;
+        ascent-override: 63.720703125%;
+      }
+
+      @font-face {
+        font-family: 'Courier-normal';
+        src: url('./test_fonts//Courier\ New.woff2');
+        size-adjust: 175.04273504273505%;
+        /* descent-override: 0%; */
+        /* ascent-override: 57.12890625%;  */
+      }
+
+      @font-face {
+        font-family: 'Fira Code';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/fira-code:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+        size-adjust: 145.5604075691412%;
+        descent-override: 0%;
+        ascent-override: 68.7%;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+        size-adjust: 138.88888889%;
+        descent-override: 0%;
+        ascent-override: 72%;
+      }
+
+      /* source-code-pro-latin-wght-normal */
+      @font-face {
+        font-family: 'Source Code Pro';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/source-code-pro:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+        size-adjust: 151.5151515151515%;
+        descent-override: 0%;
+        ascent-override: 66%;
+      }
+      /* ubuntu-mono-latin-400-normal */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-mono@latest/latin-400-normal.woff2)
+            format('woff2'),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-mono@latest/latin-400-normal.woff)
+            format('woff');
+        size-adjust: 161.534578%;
+        descent-override: 0%;
+        ascent-override: 61.90625%;
+      }
+
+      @font-face {
+        font-family: 'Victor Mono';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/victor-mono:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+        size-adjust: 125%;
+        descent-override: 0%;
+        ascent-override: 80%;
+      }
+
+      /* Individual line heights for each font */
+      .anonymous-pro {
+        font-family: 'Anonymous Pro';
+        line-height: 2;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .courier {
+        font-family: 'Courier-normal';
+        line-height: 2;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .fira {
+        font-family: 'Fira Code';
+        line-height: 1;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .source-code {
+        font-family: 'Source Code Pro';
+        line-height: 1;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .ubuntu {
+        font-family: 'Ubuntu Mono';
+        line-height: 1;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .jetbrains {
+        font-family: 'JetBrains Mono';
+        line-height: 1;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .victor {
+        font-family: 'Victor Mono';
+        line-height: 1;
+        font-size: 64px;
+        border: 2px solid blue;
+      }
+
+      .font-box {
+        display: inline-block;
+      }
+
+      .font-container {
+        gap: 20px;
+        padding: 2rem;
+      }
+
+      .font-row {
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Font Line Height Comparison</h1>
+
+    <div class="font-container">
+      <div class="font-row">
+        <span class="font-box anonymous-pro">Anony Pro</span>
+
+        <span class="font-box fira">Fira Code</span>
+      </div>
+      <div class="font-row">
+        <span class="font-box jetbrains">JetBrains Mono</span>
+        <span class="font-box victor">Victor Mono</span>
+      </div>
+      <div class="font-row">
+        <span class="font-box courier">Courier</span>
+        <span class="font-box source-code">Source Code Pro</span>
+      </div>
+      <div class="font-row">
+        <span class="font-box ubuntu">Ubuntu Mono</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Font Comparison - Andy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        cursor:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='80' viewBox='0 0 100 80'%3E%3Crect width='58' height='64' x='1' y='0' fill='none' stroke='red' stroke-width='2'/%3E%3Ctext x='2' y='73' font-size='10' fill='red'%3EAP: 64px%3C/text%3E%3C/svg%3E")
+            30 27,
+          auto;
+      }
+
+      body {
+        padding: 2rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .font-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .sample {
+        font-size: 64px;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+      }
+
+      .metrics {
+        font-size: 14px;
+        color: #666;
+        display: grid;
+        gap: 0.25rem;
+      }
+
+      .font-name {
+        position: relative;
+        padding-left: 1.2em;
+      }
+
+      .dot {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+
+      .dot.red {
+        background-color: #ff0000;
+      }
+
+      .dot.blue {
+        background-color: #0000ff;
+      }
+      :root {
+        --target-cap-height: 40.78;
+      }
+
+      /* Font Families */
+      @font-face {
+        font-family: 'Anonymous Pro';
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/anonymous-pro@latest/latin-400-normal.woff2)
+            format('woff2'),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/anonymous-pro@latest/latin-400-normal.woff)
+            format('woff');
+        size-adjust: 156.939676%;
+      }
+
+      @font-face {
+        font-family: 'Courier-normal';
+        src: local('Courier');
+        --cap-height: 37.56;
+        size-adjust: 170.394036%;
+      }
+
+      @font-face {
+        font-family: 'Fira Code';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/fira-code:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+
+        size-adjust: 141.59292%;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+
+        size-adjust: 138.88888889%;
+      }
+
+      /* source-code-pro-latin-wght-normal */
+      @font-face {
+        font-family: 'Source Code Pro';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/source-code-pro:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+        size-adjust: 151.515151%;
+      }
+      /* ubuntu-mono-latin-400-normal */
+      @font-face {
+        font-family: 'Ubuntu Mono';
+
+        src:
+          url(https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-mono@latest/latin-400-normal.woff2)
+            format('woff2'),
+          url(https://cdn.jsdelivr.net/fontsource/fonts/ubuntu-mono@latest/latin-400-normal.woff)
+            format('woff');
+        size-adjust: 161.534578%;
+      }
+
+      @font-face {
+        font-family: 'Victor Mono';
+        src: url(https://cdn.jsdelivr.net/fontsource/fonts/victor-mono:vf@latest/latin-wght-normal.woff2)
+          format('woff2-variations');
+        size-adjust: 125%;
+      }
+
+      .anonymous-pro {
+        font-family: 'Anonymous Pro';
+      }
+      .courier {
+        font-family: 'Courier-normal';
+      }
+      .fira {
+        font-family: 'Fira Code';
+      }
+      .source-code {
+        font-family: 'Source Code Pro', monospace;
+      }
+      .ubuntu {
+        font-family: 'Ubuntu Mono', monospace;
+      }
+
+      .jetbrains {
+        font-family: 'JetBrains Mono';
+      }
+      .victor {
+        font-family: 'Victor Mono';
+      }
+
+      @media (max-width: 1200px) {
+        .grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <!-- Row 1 -->
+      <div class="font-card">
+        <div class="sample anonymous-pro">Andy</div>
+        <div class="metrics">
+          <div class="font-name">Anonymous Pro</div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 40.78</div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="sample fira">Andy</div>
+        <div class="metrics">
+          <div class="font-name">
+            <span class="dot red"></span>
+            Fira Code
+          </div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 45.2</div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="sample jetbrains">Andy</div>
+        <div class="metrics">
+          <div class="font-name">
+            <span class="dot blue"></span>
+            JetBrains Mono
+          </div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 46.08</div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="sample victor">Andy</div>
+        <div class="metrics">
+          <div class="font-name">Victor Mono Variable</div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 51.2</div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="sample courier">Andy</div>
+        <div class="metrics">
+          <div class="font-name">Courier</div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 37.56</div>
+        </div>
+      </div>
+
+      <!-- Additional font cards can be added following the same pattern -->
+
+      <div class="font-card">
+        <div class="sample source-code">Andy</div>
+        <div class="metrics">
+          <div class="font-name">Source Code Pro</div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 42.24</div>
+        </div>
+      </div>
+
+      <div class="font-card">
+        <div class="sample ubuntu">Andy</div>
+        <div class="metrics">
+          <div class="font-name">
+            <span class="dot red"></span>
+            Ubuntu Mono
+          </div>
+          <div>Size, px: 64.00</div>
+          <div>Cap, px: 39.62</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

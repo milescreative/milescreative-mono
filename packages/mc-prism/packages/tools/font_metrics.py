@@ -13,17 +13,25 @@ class FontAnalyzer:
         hhea_table = self.font['hhea']
         os2_table = self.font['OS/2']
 
-        return {
+        cap_height = os2_table.sCapHeight / self.units_per_em if hasattr(os2_table, 'sCapHeight') and os2_table.sCapHeight != 0 else None
+
+        metrics = {
             "units_per_em": self.units_per_em,
             "ascent": hhea_table.ascent / self.units_per_em,
             "descent": hhea_table.descent / self.units_per_em,
             "line_gap": hhea_table.lineGap / self.units_per_em,
-            "cap_height": os2_table.sCapHeight / self.units_per_em if hasattr(os2_table, 'sCapHeight') and os2_table.sCapHeight != 0 else None,
+            "cap_height": cap_height,
             "x_height": os2_table.sxHeight / self.units_per_em if hasattr(os2_table, 'sxHeight') and os2_table.sxHeight != 0 else None,
             "default_width": os2_table.xAvgCharWidth / self.units_per_em,
             "italic_angle": self.font['post'].italicAngle,
-            "bounding_box": (self.font['head'].xMin, self.font['head'].yMin, self.font['head'].xMax, self.font['head'].yMax),
+            "bounding_box": (self.font['head'].xMin, self.font['head'].yMin, self.font['head'].xMax, self.font['head'].yMax)
         }
+
+        # Add size-adjust calculation if cap_height is available
+        if cap_height:
+            metrics["size_adjust"] = 100 * (1 / cap_height)
+
+        return metrics
 
     def get_advance_widths(self):
         hmtx_table = self.font['hmtx']
@@ -84,5 +92,5 @@ def analyze_font_file(font_path, save_to_file=False, output_path=None):
 if __name__ == "__main__":
     # Example usage when run as a script
     current_dir = Path(__file__).parent
-    font_path = current_dir / 'test_fonts' / 'OPenSans-Regular.woff2'
+    font_path = current_dir / 'test_fonts' / 'Courier New.woff2'
     analyze_font_file(font_path, save_to_file=True)

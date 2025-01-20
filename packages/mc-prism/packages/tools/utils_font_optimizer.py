@@ -1,35 +1,43 @@
 #!/usr/bin/env python3
 
 import sys
-from fontTools.subset import Subsetter, Options
 from fontTools.ttLib import TTFont
 import os
 
-def optimize_font(input_file: str, output_file: str) -> None:
-    """Optimize WOFF/WOFF2 font through subsetting and recompression."""
+def optimize_font(input_file: str, output_file: str, normalize: bool = False) -> None:
+    """
+    Optimize font through subsetting and recompression.
+    Converts TTF to WOFF2 format.
+    If normalize=True, adjusts metrics so descent=0, ascent=cap-height, and line-gap=0
+    """
     try:
         # Load the font
         font = TTFont(input_file)
+
+        # Store original flavor and handle TTF conversion
         original_flavor = font.flavor
+        if input_file.endswith('.ttf'):
+            font.flavor = 'woff2'
+            output_file = os.path.splitext(output_file)[0] + '.woff2'
 
-        # Subsetting options
-        options = Options()
-        # Suppress the warning with type: ignore
-        options.layout_features = [  # type: ignore
-            'tnum', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09',
-            'ss10', 'ss11', 'ss12', 'ss13', 'ss14', 'ss15'
-        ]
-        # Suppress the warning with type: ignore
-        options.unicodes = (  # type: ignore
-            list(range(0x0020, 0x007F + 1)) +  # Basic Latin
-            list(range(0x0080, 0x00FF + 1)) +  # Latin-1 Supplement
-            [0x201E, 0x201C, 0x20AC, 0x201E, 0x201C, 0x201D, 0x2013, 0x2014, 0x2212, 0x2002, 0x2003]  # Special characters
-        )
+        if normalize:
+            os2 = font['OS/2']
+            hhea = font['hhea']
 
-        # Subset the font
-        subsetter = Subsetter(options=options)
-        subsetter.populate(unicodes=getattr(options, 'unicodes', []))  # Use getattr to avoid type warning
-        subsetter.subset(font)
+            # Get cap height from OS/2 table
+            cap_height = os2.sCapHeight
+
+            # Set metrics
+            os2.sTypoAscender = cap_height
+            os2.sTypoDescender = 0
+            os2.sTypoLineGap = 0
+            os2.usWinAscent = cap_height
+            os2.usWinDescent = 0
+
+            # Update hhea metrics
+            hhea.ascent = cap_height
+            hhea.descent = 0
+            hhea.lineGap = 0
 
         # Restore original flavor (woff/woff2)
         font.flavor = original_flavor
@@ -44,19 +52,24 @@ def optimize_font(input_file: str, output_file: str) -> None:
 
 if __name__ == '__main__':
     if len(sys.argv) not in [2, 3]:
-        print("Usage: python optimize.py <input_woff_file> [output_directory]")
-        print("Example: python optimize.py input.woff2 [/path/to/output]")
+        print("Usage: python optimize.py <input_font_file> [output_directory]")
+        print("Example: python optimize.py input.ttf [/path/to/output]")
         sys.exit(1)
 
-    input_file = sys.argv[1]
+    input_file = sys.argv[1].strip('"').strip("'")  # Remove any quotes
+    input_file = os.path.expanduser(input_file)  # Expand user path if present
 
-    if not input_file.endswith(('.woff', '.woff2')):
-        print("Error: Input file must be a WOFF or WOFF2 file", file=sys.stderr)
+    if not input_file.lower().endswith(('.woff', '.woff2', '.ttf')):
+        print("Error: Input file must be a TTF, WOFF, or WOFF2 file", file=sys.stderr)
         sys.exit(1)
 
     # Handle output directory
     input_filename = os.path.basename(input_file)
-    base_name = input_filename  # Keep same extension for optimization
+    if input_file.endswith('.ttf'):
+        # Convert TTF filename to WOFF2
+        base_name = os.path.splitext(input_filename)[0] + '.woff2'
+    else:
+        base_name = input_filename  # Keep same extension for optimization
 
     if len(sys.argv) == 3:
         output_dir = sys.argv[2]
@@ -66,4 +79,4 @@ if __name__ == '__main__':
         output_dir = os.path.dirname(input_file) or '.'
 
     output_file = os.path.join(output_dir, base_name)
-    optimize_font(input_file, output_file)
+    optimize_font(input_file, output_file, normalize=True)  # Set normalize=True by default

@@ -1,46 +1,30 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { searchFonts, installFont, optimizeFont } from '../lib/fonts';
-
-interface InstallOptions {
-  optimize?: boolean;
-}
+import { installFont } from '../lib/installer';
 
 const program = new Command();
 
 program
   .name('mc-fonts')
-  .description('Font management and optimization CLI')
-  .version('0.0.1');
-
-program
-  .command('search')
-  .description('Search available fonts from Fontsource')
-  .argument('[query]', 'Search query')
-  .action(async (query: string | undefined) => {
-    const results = await searchFonts(query);
-    console.table(results);
-  });
+  .description('CLI to install and optimize fonts for mc-prism')
+  .version('0.1.0');
 
 program
   .command('install')
-  .description('Install a font from Fontsource')
-  .argument('<font>', 'Font name to install')
-  .option('-o, --optimize', 'Optimize the font after installation')
-  .action(async (font: string, options: InstallOptions) => {
-    await installFont(font);
-    if (options.optimize) {
-      await optimizeFont(font);
-    }
-  });
-
-program
-  .command('optimize')
-  .description('Optimize an installed font')
-  .argument('<font>', 'Font name to optimize')
+  .description('Install and optimize a font')
+  .argument('<font>', 'font name to install (e.g. "Roboto")')
   .action(async (font: string) => {
-    await optimizeFont(font);
+    try {
+      await installFont(font);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error('Failed to install font:', error.message);
+      } else {
+        console.error('Failed to install font:', String(error));
+      }
+      process.exit(1);
+    }
   });
 
 program.parse();

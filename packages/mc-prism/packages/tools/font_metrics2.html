@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Normalize Font Sizes</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&family=Playfair+Display:wght@400&family=Courier+Prime:wght@400&display=swap');
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 0;
+      }
+
+      .font-sample {
+        display: flex;
+        gap: 0px;
+        justify-content: last baseline;
+      }
+
+      .font-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ccc;
+        /* width: 150px; */
+        /* height: 50px; */
+        position: relative;
+      }
+
+      .font-container span {
+        position: absolute;
+        font-size: calc(40px * var(--scale));
+        /* line-height: 1; */
+        margin: 0;
+        padding: 0;
+      }
+
+      .roboto {
+        /* --scale: 0.85; Adjusted scale for Roboto */
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .playfair {
+        --scale: 0.7; Adjusted scale for Playfair Display
+        font-family: 'Playfair Display', serif;
+      }
+
+      .courier {
+        /* --scale: 0.9; Adjusted scale for Courier Prime */
+        font-family: 'Courier Prime', monospace;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      div {
+        border: 1px solid red;
+        padding: 0;
+        margin: 0;
+      }
+
+      .label {
+        text-align: center;
+        /* margin-top: 10px; */
+        font-size: 3em;
+        color: #555;
+        vertical-align: baseline;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Normalizing Font Sizes with Cap Height</h1>
+    <div class="font-sample">
+      <div class="label roboto">Roboto</div>
+      <div class="label playfair">Playfair Display</div>
+      <div class="label courier">Courier Prime</div>
+    </div>
+  </body>
+</html>

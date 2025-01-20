@@ -1,0 +1,126 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Palanquin&display=swap');
+  * {
+    /*   border: 1px solid red !important; */
+  }
+
+  body {
+    font-family: 'Palanquin', sans-serif;
+    margin: 32px;
+    background-color: hsl(0deg 5% 95%);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .card {
+    border-radius: 5px;
+    padding: 32px;
+    background-color: white;
+    filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+      drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+    max-width: 500px;
+  }
+  .card > * + * {
+    margin-top: 16px;
+  }
+
+  h1 {
+    --lineHeight: 1;
+    line-height: var(--lineHeight);
+    font-size: 2rem;
+  }
+  p {
+    --lineHeight: 1.4;
+    line-height: var(--lineHeight);
+  }
+
+  button {
+    --lineHeight: 1.2;
+    line-height: var(--lineHeight);
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 16px 24px;
+    background-color: hsl(50deg 100% 80%);
+    border-radius: 5px;
+    border: 0;
+  }
+
+  .text::before {
+    content: '';
+    margin-bottom: ??;
+    display: block;
+  }
+  .text::after {
+    content: '';
+    margin-top: ??;
+    display: block;
+  }
+
+  /* just for the click animation */
+  .text::before {
+    transition: 1s all;
+  }
+  .text::after {
+    transition: 1s all;
+  }
+
+  /* With cap size */
+
+  body > * + * {
+    margin-left: 32px;
+  }
+
+  :root {
+    --fontDeltaAbove: 0.64;
+    --fontDeltaBelow: 0.491;
+    --normalLineHeight: 1.811;
+  }
+
+  .cap-height-text::before {
+    content: '';
+    --lineHeightNormalization: calc(
+      (var(--lineHeight) - var(--normalLineHeight)) / 2
+    );
+    margin-bottom: calc(
+      (var(--fontDeltaAbove) + var(--lineHeightNormalization)) * -1em
+    );
+    display: block;
+  }
+
+  .cap-height-text::after {
+    content: '';
+    --lineHeightNormalization: calc(
+      (var(--lineHeight) - var(--normalLineHeight)) / 2
+    );
+    margin-top: calc(
+      (var(--fontDeltaBelow) + var(--lineHeightNormalization)) * -1em
+    );
+    display: block;
+  }
+
+  /* works only in Safari Developer Preview right now */
+
+  .original * {
+    text-edge: cap alphabetic;
+    leading-trim: both;
+  }
+</style>
+
+<div class="card original">
+  <h1 class="text">Headline</h1>
+  <p class="text">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur iusto
+    tempora iure sequi, exercitationem magni porro incidunt enim magnam maiores
+    earum, quis accusantium dolorem ab, praesentium labore vel officiis ex?
+  </p>
+  <button><div class="text">Button</div></button>
+</div>
+<div class="card">
+  <h1 class="cap-height-text">Headline</h1>
+  <p class="cap-height-text">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur iusto
+    tempora iure sequi, exercitationem magni porro incidunt enim magnam maiores
+    earum, quis accusantium dolorem ab, praesentium labore vel officiis ex?
+  </p>
+  <button><div class="cap-height-text">Button</div></button>
+</div>
