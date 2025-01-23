@@ -1,0 +1,7 @@
+:root {
+  --font-arial: 'Arial', sans-serif;
+}
+
+.font-arial {
+  font-family: var(--font-arial);
+}

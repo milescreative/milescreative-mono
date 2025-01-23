@@ -16,6 +16,7 @@
   "dependencies": {
     "@milescreative/mc-auth": "workspace:*",
     "@milescreative/mc-rate-limiter": "workspace:*",
+    "@mc-prism/fonts": "workspace:*",
     "@neondatabase/serverless": "^0.9.0",
     "@prisma/client": "5.22.0",
     "@radix-ui/react-slot": "^1.1.1",

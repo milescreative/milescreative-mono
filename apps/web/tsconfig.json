@@ -15,17 +15,18 @@
       "@/*": ["./*"],
       "@milescreative/mc-auth": ["../../packages/mc-auth/src/index.ts"],
       "@milescreative/mc-auth/*": ["../../packages/mc-auth/src/*"],
-      "@milescreative/mc-rate-limiter": ["../../packages/mc-rate-limiter/src/index.ts"],
-      "@milescreative/mc-rate-limiter/*": ["../../packages/mc-rate-limiter/src/*"]
+      "@milescreative/mc-rate-limiter": [
+        "../../packages/mc-rate-limiter/src/index.ts"
+      ],
+      "@milescreative/mc-rate-limiter/*": [
+        "../../packages/mc-rate-limiter/src/*"
+      ],
+      "@mc-prism/fonts": [
+        "../../packages/mc-prism/packages/fonts/src/index.ts"
+      ],
+      "@mc-prism/fonts/*": ["../../packages/mc-prism/packages/fonts/src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }

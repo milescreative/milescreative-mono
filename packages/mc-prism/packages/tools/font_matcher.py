@@ -1,6 +1,8 @@
 from rapidfuzz import process, fuzz, utils
 from fontsource_fetcher import FontSourceFetcher
 from typing import List, Tuple, Optional
+import sys
+import json
 
 
 class FontMatcher:
@@ -22,7 +24,7 @@ class FontMatcher:
 
         return variants if len(variants) > 1 else []
 
-    def find_font_match(self, query: str, threshold: int = 90, debug: bool = False) -> Tuple[Optional[str], List[Tuple[str, float]]]:
+    def find_font_match(self, query: str, threshold: int = 89, debug: bool = False) -> Tuple[Optional[str], List[Tuple[str, float]]]:
         """
         Find matching fonts based on priority:
         1. Single 100% match -> return match
@@ -77,53 +79,27 @@ class FontMatcher:
         # Priority 6: No matches
         return None, []
 
-def main():
+def find_font_candidates(query: str, threshold: int = 89) -> List[Tuple[str, float]]:
     matcher = FontMatcher()
 
-    while True:
-        query = input("\nEnter font name to search (or 'q' to quit): ").strip()
-        if query.lower() == 'q':
-            break
+    # Get all matches with a score greater than 90%
+    _, debug_matches = matcher.find_font_match(query, threshold=threshold, debug=True)
 
-        # Show debug results first
-        _, debug_matches = matcher.find_font_match(query, debug=True)
-        print("\nTop 5 closest matches:")
-        for font, score in debug_matches:
-            print(f"- {font} (score: {score:.1f})")
+    candidates = [(font, score) for font, score in debug_matches if score > threshold]
 
-        print("\nBest match based on priority:")
-        best_match, similar_matches = matcher.find_font_match(query)
+    return candidates
 
-        if best_match:
-            if similar_matches:  # This means it's a 90-95% match
-                print(f"Found close match (warning: {similar_matches[0][1]:.1f}% confidence): {best_match}")
-            else:
-                print(f"Found match: {best_match}")
-        elif similar_matches:
-            # Check if all matches are variants (start with the search term)
-            are_variants = all(m[0].lower().startswith(query.lower().replace(' ', '-')) for m in similar_matches)
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python font_matcher.py <font-name>")
+        return
 
-            if are_variants:
-                print(f"Found {len(similar_matches)} variants of '{query}':")
-                for i, (font, score) in enumerate(similar_matches, 1):
-                    variant_name = font.replace(f"{query}-", "")  # Show only the variant part
-                    print(f"{i}. {variant_name} (match score: {score:.1f})")
+    query = sys.argv[1]
+    candidates = find_font_candidates(query)
 
-                if len(similar_matches) > 1:
-                    try:
-                        choice = input("\nSelect variant number (or press Enter to skip): ").strip()
-                        if choice and choice.isdigit():
-                            idx = int(choice) - 1
-                            if 0 <= idx < len(similar_matches):
-                                print(f"\nSelected: {similar_matches[idx][0]}")
-                    except ValueError:
-                        print("Invalid selection")
-            else:
-                print("Multiple possible matches found:")
-                for i, (font, score) in enumerate(similar_matches, 1):
-                    print(f"{i}. {font} (match score: {score:.1f})")
-        else:
-            print("No matching fonts found")
+    # Output the candidates as JSON
+    result = [{"id": font, "confidence": score} for font, score in candidates]
+    print(json.dumps(result))
 
 if __name__ == "__main__":
     main()

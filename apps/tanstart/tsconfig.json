@@ -1,0 +1,34 @@
+{
+  "include": ["**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "ES2022",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"],
+      "@milescreative/mc-auth": ["../../packages/mc-auth/src/index.ts"],
+      "@milescreative/mc-auth/*": ["../../packages/mc-auth/src/*"],
+      "@milescreative/mc-rate-limiter": [
+        "../../packages/mc-rate-limiter/src/index.ts"
+      ],
+      "@milescreative/mc-rate-limiter/*": [
+        "../../packages/mc-rate-limiter/src/*"
+      ],
+      "@mc-prism/fonts": [
+        "../../packages/mc-prism/packages/fonts/src/index.ts"
+      ],
+      "@mc-prism/fonts/*": ["../../packages/mc-prism/packages/fonts/src/*"]
+    },
+    "noEmit": true
+  }
+}

@@ -2,11 +2,13 @@
   "name": "@mc-prism/fonts",
   "version": "0.0.1",
   "description": "Font management and optimization wrapper around Fontsource",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "type": "module",
+  "bin": {
+    "fonts": "./dist/cli/index.js"
+  },
   "files": [
-    "dist/**"
+    "dist",
+    "dist/cli"
   ],
   "scripts": {
     "build": "tsup",
@@ -15,31 +17,39 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@fontsource-variable/grandstander": "^5.1.2",
-    "axios": "^1.6.5",
+    "@antfu/ni": "^23.2.0",
+    "@leeoniya/ufuzzy": "^1.0.18",
+    "@nozbe/microfuzz": "^1.0.0",
+    "chalk": "4.1.2",
     "commander": "^11.1.0",
-    "google-font-metadata": "^6.0.3",
-    "inquirer": "^9.2.12",
-    "puppeteer": "^24.0.0"
+    "cosmiconfig": "^9.0.0",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.3.0",
+    "fuzzysort": "^3.1.0",
+    "https-proxy-agent": "^6.2.0",
+    "node-fetch": "^3.3.2",
+    "prompts": "^2.4.2",
+    "tsconfig-paths": "^4.2.0",
+    "type-fest": "^4.33.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/inquirer": "^9.0.7",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.10.6",
+    "@types/prompts": "^2.4.9",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"
   },
   "exports": {
     ".": {
-      "development": {
-        "types": "./src/index.ts",
-        "import": "./src/index.ts"
-      },
-      "default": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.mjs",
-        "require": "./dist/index.js"
-      }
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./cli": {
+      "import": "./dist/cli/index.js",
+      "types": "./dist/cli/index.d.ts"
     }
   }
 }

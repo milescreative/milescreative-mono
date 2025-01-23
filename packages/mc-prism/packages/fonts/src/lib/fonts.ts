@@ -1,11 +1,54 @@
 import axios from 'axios';
 import { execSync } from 'child_process';
 import { existsSync } from 'fs';
-import { join } from 'path';
+import { join, resolve, dirname } from 'path';
 import fs from 'fs';
 import path from 'path';
+import { detect } from 'detect-package-manager';
+import type { FontMetadata } from '../declarations';
 
 const FONTSOURCE_API = 'https://api.fontsource.org';
+const TOOLS_DIR = resolve(__dirname, '../../../tools');
+const OPTIMIZER_PATH = join(TOOLS_DIR, 'dist/optimize-font');
+
+function findUpSync(
+  filename: string,
+  startPath: string = process.cwd()
+): string | null {
+  let currentDir = startPath;
+  while (true) {
+    const filePath = join(currentDir, filename);
+    if (existsSync(filePath)) {
+      return filePath;
+    }
+
+    const parentDir = dirname(currentDir);
+    if (parentDir === currentDir) {
+      return null;
+    }
+    currentDir = parentDir;
+  }
+}
+
+function getFontPackageName(fontId: string, isVariable: boolean): string {
+  return isVariable
+    ? `@fontsource-variable/${fontId}`
+    : `@fontsource/${fontId}`;
+}
+
+async function getInstallCommand(packageName: string): Promise<string> {
+  const pm = await detect();
+  switch (pm) {
+    case 'yarn':
+      return `yarn add ${packageName}`;
+    case 'pnpm':
+      return `pnpm add ${packageName}`;
+    case 'bun':
+      return `bun add ${packageName}`;
+    default:
+      return `npm install ${packageName}`;
+  }
+}
 
 export interface FontInfo {
   id: string;
@@ -27,29 +70,62 @@ export async function searchFonts(query?: string): Promise<FontInfo[]> {
   }
 }
 
-export async function installFont(fontName: string): Promise<void> {
+export async function installFont(
+  fontId: string,
+  isVariable: boolean
+): Promise<void> {
   try {
-    // Use pnpm to install the font
-    execSync(`pnpm add @fontsource/${fontName}`, { stdio: 'inherit' });
-    console.log(`Successfully installed @fontsource/${fontName}`);
+    const packageName = getFontPackageName(fontId, isVariable);
+    const installCmd = await getInstallCommand(packageName);
+    execSync(installCmd, { stdio: 'inherit' });
+    console.log(`Successfully installed ${packageName}`);
   } catch (error) {
     console.error('Error installing font:', error);
     throw error;
   }
 }
 
-export async function optimizeFont(fontName: string): Promise<void> {
-  const fontDir = join(process.cwd(), 'node_modules', '@fontsource', fontName);
+export async function optimizeFont(
+  fontId: string,
+  isVariable: boolean
+): Promise<void> {
+  const packageName = getFontPackageName(fontId, isVariable);
+  const parts = packageName.split('/');
+  if (parts.length !== 2) {
+    throw new Error(`Invalid package name format: ${packageName}`);
+  }
+  const scope = parts[0]!;
+  const name = parts[1]!;
+  const fontDir = join(process.cwd(), 'node_modules', scope, name);
 
   if (!existsSync(fontDir)) {
-    throw new Error(`Font ${fontName} is not installed`);
+    throw new Error(`Font ${packageName} is not installed`);
+  }
+
+  if (!existsSync(OPTIMIZER_PATH)) {
+    throw new Error(
+      'Font optimizer not found. Please ensure the tools package is built.'
+    );
   }
 
   try {
-    // Here we'll integrate your existing font-optimizer script
-    // This is a placeholder - we'll need to implement the actual optimization logic
-    console.log(`Optimizing font: ${fontName}`);
-    // TODO: Implement font optimization using your existing script
+    execSync(`"${OPTIMIZER_PATH}" "${fontId}"`, {
+      stdio: 'inherit',
+      env: {
+        ...process.env,
+        FONT_DIR: fontDir,
+        IS_VARIABLE: isVariable.toString(),
+        OUTPUT_DIR: join(
+          process.cwd(),
+          'node_modules',
+          '@mc-prism',
+          'fonts',
+          'optimized',
+          fontId
+        ),
+      },
+    });
+    console.log(`Successfully optimized font: ${packageName}`);
   } catch (error) {
     console.error('Error optimizing font:', error);
     throw error;

@@ -1,0 +1,10 @@
+{
+  "tailwind": {
+    "config": "tailwind.config.cjs",
+    "css": "app/styles/app.css",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "optimize": true,
+  "normalize": true
+}

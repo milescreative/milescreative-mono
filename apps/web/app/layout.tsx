@@ -8,7 +8,12 @@ import {
   Corben,
 } from "next/font/google";
 
+import { Arial } from "@mc-prism/fonts";
+
 import "./globals.css";
+import test from "node:test";
+
+const testFont = Arial({ variable: "--font-arial" });
 
 // If loading a variable font, you don't need to specify the font weight
 const spaceGrotesk = Space_Grotesk({
@@ -44,7 +49,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${spaceGrotesk.variable} ${alegreya.variable} ${satisfy.variable}`}
+      className={`${poppins.variable} ${spaceGrotesk.variable} ${alegreya.variable} ${satisfy.variable} ${testFont.variable}`}
     >
       <body className="bg-background font-sans text-foreground">
         {children}

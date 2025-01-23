@@ -16,6 +16,7 @@ export default {
         grotesk: ["var(--font-spacegrotesk)"],
         alegreya: ["var(--font-alegreya)"],
         satisfy: ["var(--font-satisfy)"],
+        arial: ["var(--font-arial)"],
       },
       borderRadius: {
         lg: "var(--radius)",

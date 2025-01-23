@@ -1,30 +1,31 @@
 #!/usr/bin/env node
-
+import { add } from '@/src/cli/commands/add';
+import { diff } from '@/src/cli/commands/diff';
+import { init } from '@/src/cli/commands/init';
 import { Command } from 'commander';
-import { installFont } from '../lib/installer';
 
-const program = new Command();
+import { DEPRECATED_MESSAGE } from './deprecated';
+import { getPackageInfo } from './utils/get-package-info';
 
-program
-  .name('mc-fonts')
-  .description('CLI to install and optimize fonts for mc-prism')
-  .version('0.1.0');
+process.on('SIGINT', () => process.exit(0));
+process.on('SIGTERM', () => process.exit(0));
 
-program
-  .command('install')
-  .description('Install and optimize a font')
-  .argument('<font>', 'font name to install (e.g. "Roboto")')
-  .action(async (font: string) => {
-    try {
-      await installFont(font);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error('Failed to install font:', error.message);
-      } else {
-        console.error('Failed to install font:', String(error));
-      }
-      process.exit(1);
-    }
-  });
+async function main() {
+  const packageInfo = await getPackageInfo();
 
-program.parse();
+  const program = new Command()
+    .name('@mc-prism/fonts')
+    .description('add components and dependencies to your project')
+    .addHelpText('after', DEPRECATED_MESSAGE)
+    .version(
+      packageInfo.version || '1.0.0',
+      '-v, --version',
+      'display the version number'
+    );
+
+  program.addCommand(init).addCommand(add).addCommand(diff);
+
+  program.parse();
+}
+
+main();
